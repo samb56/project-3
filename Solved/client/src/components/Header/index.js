@@ -19,7 +19,7 @@ import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 
 
 
-const pages = ['Recipes', 'signup', 'login', 'Blog(Coming Soon)'];
+const pages = ['signup', 'login', 'Blog(Coming Soon)'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
@@ -98,6 +98,10 @@ const ResponsiveAppBar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
+
+
+
+
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
@@ -107,6 +111,22 @@ const ResponsiveAppBar = () => {
                   </Typography>
                 </MenuItem>
               ))}
+
+              {Auth.loggedIn() ? (
+                <>
+                  <MenuItem key="Recipe" onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">
+                      <Link style={{ textDecoration: "none", color: "black" }} to={`/Recipes`}>
+                        Recipes
+                      </Link>
+                    </Typography>
+                  </MenuItem>
+                </>
+              ) : (
+                <>
+                  <div> </div>
+                </>
+              )}
             </Menu>
           </Box>
           <RestaurantIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -140,6 +160,26 @@ const ResponsiveAppBar = () => {
                 </Link>
               </Button>
             ))}
+            {Auth.loggedIn() ? (
+              <>
+                <MenuItem key="Recipe" onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link style={{ textDecoration: "none", color: "black" }} to={`/Recipes`}>
+                      Recipes
+                    </Link>
+                  </Typography>
+                </MenuItem>
+
+
+                <Button style={{ cursor: 'pointer' }} onClick={logout}>
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <div> </div>
+              </>
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -173,18 +213,26 @@ const ResponsiveAppBar = () => {
           </Box>
           <div>
 
-            {Auth.loggedIn() ? (
+            {/* {Auth.loggedIn() ? (
               <>
-                <span>Hey there, {Auth.getProfile().data.username}!</span>
-                <button className="btn btn-lg btn-light m-2" onClick={logout}>
+                <MenuItem key="Recipe" onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link style={{ textDecoration: "none", color: "black" }} to={`/Recipes`}>
+                      Recipes
+                    </Link>
+                  </Typography>
+                </MenuItem>
+
+                
+                <Button style={{ cursor: 'pointer' }} onClick={logout}>
                   Logout
-                </button>
+                </Button>
               </>
             ) : (
               <>
                 <div> </div>
               </>
-            )}
+            )} */}
           </div>
         </Toolbar>
       </Container>
